@@ -1,0 +1,800 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Blind Source Separation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{eecs491---a5}{%
+\subsection{EECS491 - A5}\label{eecs491---a5}}
+
+\hypertarget{blind-source-separation}{%
+\subsubsection{Blind Source Separation}\label{blind-source-separation}}
+
+\hypertarget{tristan-maidment-tdm47}{%
+\subparagraph{Tristan Maidment (tdm47)}\label{tristan-maidment-tdm47}}
+
+\hypertarget{goal}{%
+\paragraph{Goal}\label{goal}}
+
+The goal for this assignment is to implement the BSS algorithm by hand,
+and apply it on a mixed distribution of two independent waveforms.
+
+\hypertarget{implementation}{%
+\paragraph{Implementation}\label{implementation}}
+
+The first step is to import the wave files used in the demo.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{wavfile}
+        
+        \PY{n}{srate}\PY{p}{,} \PY{n}{dataBach} \PY{o}{=} \PY{n}{wavfile}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/bach.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{dataSpeech} \PY{o}{=} \PY{n}{wavfile}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/speech.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        
+        
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{519}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{audionorm}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} ensure data is ndarray with float numbers}
+            \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate lower and upper bound}
+            \PY{n}{lbound}\PY{p}{,} \PY{n}{ubound} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{k}{if} \PY{n}{lbound} \PY{o}{==} \PY{n}{ubound}\PY{p}{:}
+                \PY{n}{offset} \PY{o}{=} \PY{n}{lbound}
+                \PY{n}{scalar} \PY{o}{=} \PY{l+m+mi}{1}
+                \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{size}\PY{o}{=}\PY{n}{data}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{offset} \PY{o}{=} \PY{p}{(}\PY{n}{lbound} \PY{o}{+} \PY{n}{ubound}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}
+                \PY{n}{scalar} \PY{o}{=} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{n}{ubound} \PY{o}{\PYZhy{}} \PY{n}{lbound}\PY{p}{)}
+                \PY{n}{data} \PY{o}{=} \PY{p}{(}\PY{n}{data} \PY{o}{\PYZhy{}} \PY{n}{offset}\PY{p}{)} \PY{o}{*} \PY{n}{scalar}
+            \PY{c+c1}{\PYZsh{} return normalized data}
+            \PY{k}{return} \PY{n}{data}
+\end{Verbatim}
+
+
+    Using these two data files and the normalization function, we can greate
+the ground truth waveforms.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{gtruthS} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{p}{(}\PY{n}{dataBach}\PY{p}{,} \PY{n}{dataSpeech}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The next step is to mix the independent distributions into a random
+multivariate distribution. This can be done by specifying a mixing
+matrix that linearly modifies the shape of each distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{simpleMixer}\PY{p}{(}\PY{n}{S}\PY{p}{)}\PY{p}{:}
+            \PY{n}{nchannel} \PY{o}{=} \PY{n}{S}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} generate a random matrix}
+            \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{n}{nchannel}\PY{p}{,}\PY{n}{nchannel}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} generate mixed audio data}
+            \PY{n}{X} \PY{o}{=} \PY{n}{A}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{X}\PY{p}{,} \PY{n}{A}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k}{def} \PY{n+nf}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{mat}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} plot data points}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate axis length}
+            \PY{n}{lenAxis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{mat}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} calculate scale for illustration}
+            \PY{n}{scale} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{/} \PY{n}{lenAxis}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} draw axis as arrow}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{arrow}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{arrow}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{scale} \PY{o}{*} \PY{n}{mat}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Using the defined functions, we can define a mixed distribution which
+simulates input from two different microphones. In addition, we can plot
+the true mixing matrix values on top to visualize the true disributions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{X}\PY{p}{,} \PY{n}{gtruthA} \PY{o}{=} \PY{n}{simpleMixer}\PY{p}{(}\PY{n}{gtruthS}\PY{p}{)}
+        \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gtruthA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/mixedTrackA.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{srate}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+        \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/mixedTrackB.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{srate}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    The \textbf{BSS} function works by defining a prior distribution, and
+fitting the A matrix so that this probablility of this data given this
+distribution is maximal. For that reason, the a gradient descent is
+performed on matrix A, to find the mixing matrix that most optimally
+fits the data to the distribution.
+
+A decently large step size is viable for simple distributions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{bss}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{stop}\PY{o}{=}\PY{l+m+mf}{1e\PYZhy{}8}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{,} \PY{n}{q}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nu}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{:}
+            \PY{n}{sources}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+            \PY{n}{I} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{sources}\PY{p}{)}
+            \PY{n}{likelihood} \PY{o}{=} \PY{l+m+mi}{1}
+        
+            \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{sources}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{stop} \PY{o}{\PYZgt{}} \PY{n}{likelihood}\PY{p}{:}
+                    \PY{k}{break}
+                \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o}{@} \PY{n}{data}
+                \PY{n}{A\PYZus{}grad} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{A} \PY{o}{@} \PY{p}{(}\PY{n}{d\PYZus{}logP}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)} \PY{o}{@} \PY{n}{s}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{I}\PY{p}{)}
+                \PY{n}{A} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{nu}\PY{p}{,} \PY{n}{A\PYZus{}grad}\PY{p}{)}
+                \PY{n}{likelihood} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{Pxa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{A}\PY{o}{/}\PY{n}{A}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o}{@} \PY{n}{data} 
+        
+        \PY{k}{def} \PY{n+nf}{P}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{,}\PY{n}{q}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{d\PYZus{}logP}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{n}{q} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{,} \PY{n}{s}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{Pxa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{P}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+\end{Verbatim}
+
+
+    Given synthentic laplacian data, the mixing matrix converges fairly
+quickly. In addition, it very closely represents the original mixing
+matrix.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{syntheticDataGenerate}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{nsamples}\PY{p}{)}\PY{p}{:}
+            \PY{n}{S} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{laplace}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{nsamples}\PY{p}{)}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} generate mixed audio data}
+            \PY{n}{X} \PY{o}{=} \PY{n}{A} \PY{o}{@} \PY{n}{S}
+            
+            \PY{k}{return} \PY{n}{X}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} quantity of data points}
+         \PY{n}{nsamples} \PY{o}{=} \PY{l+m+mi}{10000}
+         \PY{c+c1}{\PYZsh{} specific mixing matrix (for illustration purpose)}
+         \PY{n}{verifyA} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} generate synthetic data}
+         \PY{n}{synthData} \PY{o}{=} \PY{n}{syntheticDataGenerate}\PY{p}{(}\PY{n}{verifyA}\PY{p}{,} \PY{n}{nsamples}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} do optimization with bss function}
+         \PY{n}{estimateA}\PY{p}{,} \PY{n}{recoverData} \PY{o}{=} \PY{n}{bss}\PY{p}{(}\PY{n}{synthData}\PY{p}{,} \PY{n}{stop}\PY{o}{=}\PY{l+m+mf}{3e\PYZhy{}11}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{compareMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matA}\PY{p}{,} \PY{n}{matB}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} plot first mixing matrix}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matA}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} plot first mixing matrix}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+             \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{matB}\PY{p}{)}
+\end{Verbatim}
+
+
+    As we can see, the estimated mixing matrix very closely approximates the
+data. Occasionally, it appears to be facing the wrong direction. A
+simple explanation for this is that there is not enough equations to
+solve for all variables in the equation. For this reason, the sign
+\texttt{+/-} is estimated, which respresents a ``flipped'' distribution.
+This is represented by a vector facing the wrong direction.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{synthData}\PY{p}{,} \PY{n}{verifyA}\PY{p}{,} \PY{n}{estimateA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{A}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{bss}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} normalized sound tracks}
+         \PY{n}{S} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} write recovered sound track into WAV files}
+         \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/separatedTrackA.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{22050}\PY{p}{,} \PY{n}{S}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/separatedTrackB.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{22050}\PY{p}{,} \PY{n}{S}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    I have not set a random seed for this notebook, to allow the functions
+to be run by other users. As mentioned previously, the vectors (which
+represent the positive direction of the distributions) are ocassionally
+pointing the wrong direction, indicating a flipped distribution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gtruthA}\PY{p}{,} \PY{n}{A}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Mixing Matrix (Our Estimation)}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{A}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{Mixing Matrix (Groud Truth)}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{gtruthA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Mixing Matrix (Our Estimation)
+
+ [[ 1.         -1.66824441]
+ [ 0.85183554 -0.39164574]]
+
+Mixing Matrix (Groud Truth)
+
+ [[0.61847544 0.66618213]
+ [0.14127466 0.57728887]]
+
+    \end{Verbatim}
+
+    We can output the distribution of the estimated signals. The
+distributions are very laplacian, indicating that the maximization
+function worked as expected.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{S}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{S}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{full-unsupervised}{%
+\paragraph{Full Unsupervised}\label{full-unsupervised}}
+
+BSS is technically considered an semi supervised algorithm due to the
+necessity to specify a prior distribution. This is a limitation for real
+world applications of the algorithm since the distribution is generally
+unknown.
+
+To fix this problem, we will calculate the log-likelihood of
+distributions of various \texttt{q} values. In addition, we will be
+descending a set amount of steps for each \texttt{q}. The values of
+\texttt{q} with the highest log-likelihood after the set amount of steps
+is the q that results in the smallest mixing matrix gradients. This
+indicates that the model is converging faster. As such, we will fit the
+data with the value of q that provides the smallest gradients,
+i.e.~converges fastest, with the assumption that the distribution is
+best fit by this q.
+
+This method is fully unsupervised. However, it is not perfect for
+situations where certain distributions fit the mixed data better than
+the true prior distribution. This will be explored when testing this
+method on the synthetic data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{bss}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{max\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{q}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{nu}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{max\PYZus{}grad}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{q\PYZus{}max} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+             \PY{n}{sources}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{I} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{sources}\PY{p}{)}
+             \PY{n}{likelihood} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{q\PYZus{}max} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}
+             \PY{n}{B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{q\PYZus{}max} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{,} \PY{n}{sources}\PY{p}{,} \PY{n}{sources}\PY{p}{)}\PY{p}{)}
+             \PY{n}{q\PYZus{}range} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{q\PYZus{}max}\PY{p}{,} \PY{l+m+mf}{0.01}\PY{p}{)}
+             \PY{k}{for} \PY{n}{q} \PY{o+ow}{in} \PY{n}{q\PYZus{}range}\PY{p}{:}
+                 \PY{n}{j} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{q} \PY{o}{*} \PY{l+m+mi}{100}\PY{p}{)}
+                 \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{identity}\PY{p}{(}\PY{n}{sources}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{max\PYZus{}iter}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{s} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o}{@} \PY{n}{data}
+                     \PY{n}{A\PYZus{}grad} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{A} \PY{o}{@} \PY{p}{(}\PY{n}{d\PYZus{}logP}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q} \PY{o}{+} \PY{l+m+mf}{0.01}\PY{p}{)} \PY{o}{@} \PY{n}{s}\PY{o}{.}\PY{n}{T} \PY{o}{+} \PY{n}{I}\PY{p}{)}
+         
+                     \PY{n}{A} \PY{o}{+}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{multiply}\PY{p}{(}\PY{n}{nu}\PY{p}{,} \PY{n}{A\PYZus{}grad}\PY{p}{)}
+                 \PY{n}{likelihood}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{Pxa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{q} \PY{o}{+} \PY{l+m+mf}{0.01}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{B}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{A}
+             
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{q\PYZus{}range}\PY{p}{,} \PY{n}{likelihood}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{n}{likelihood}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{likelihood}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}ax.set\PYZus{}yscale(\PYZsq{}log\PYZsq{})}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{q:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{likelihood}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{100}\PY{p}{)}
+             \PY{n}{A} \PY{o}{=} \PY{n}{B}\PY{p}{[}\PY{n}{likelihood}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+             \PY{k}{return} \PY{n}{A}\PY{o}{/}\PY{n}{A}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{A}\PY{p}{)} \PY{o}{@} \PY{n}{data} 
+         
+         \PY{k}{def} \PY{n+nf}{P}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{,}\PY{n}{q}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{d\PYZus{}logP}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{n}{q} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{,} \PY{n}{s}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{Pxa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{A}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}s\PYZdq{}, s, \PYZdq{}A\PYZdq{}, A, \PYZdq{}q\PYZdq{}, q)}
+             \PY{k}{return} \PY{n}{P}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{det}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}def d\PYZus{}logP\PYZus{}q(s, q):}
+         \PY{c+c1}{\PYZsh{}    return \PYZhy{}np.power(np.abs(s), q) * np.log(np.abs(s))}
+         
+         \PY{k}{def} \PY{n+nf}{d\PYZus{}logP\PYZus{}q}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{:}
+             \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log2}\PY{p}{(}\PY{n}{q}\PY{o}{/}\PY{n}{s}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{power}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{subtract}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{q}\PY{p}{)}\PY{p}{)}
+             \PY{n}{B} \PY{o}{=} \PY{n}{q}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{divide}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{B}\PY{p}{)}
+\end{Verbatim}
+
+
+    As we can see, the optimal value for \texttt{q}, without any prior
+information, is \texttt{1.92}. This isn't the best guess, as it assumes
+a gaussian distribution. However, a multivariate laplace distribution is
+gaussian along the orthogonal direction, so this result is
+understandable.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{gtruthS} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{(}\PY{n}{dataBach}\PY{p}{,} \PY{n}{dataSpeech}\PY{p}{)}\PY{p}{)} 
+         \PY{n}{X}\PY{p}{,} \PY{n}{gtruthA} \PY{o}{=} \PY{n}{simpleMixer}\PY{p}{(}\PY{n}{gtruthS}\PY{p}{)}
+         \PY{n}{A}\PY{p}{,} \PY{n}{S} \PY{o}{=} \PY{n}{bss}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{n}{S} \PY{o}{=} \PY{n}{audionorm}\PY{p}{(}\PY{n}{S}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} write recovered sound track into WAV files}
+         \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/separatedTrackA\PYZus{}2.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{22050}\PY{p}{,} \PY{n}{S}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{wavfile}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/separatedTrackB\PYZus{}2.wav}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{22050}\PY{p}{,} \PY{n}{S}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+q: 2.02
+
+    \end{Verbatim}
+
+    The resulting mixing matrix is fairly accurate, and is more than enough
+to audibly seperate the two sources.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{gtruthA}\PY{p}{,} \PY{n}{A}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{images}{%
+\paragraph{Images}\label{images}}
+
+Since we have a method for estimating q, we can now apply BSS on unknown
+distributions with some accuracy. Since the distribution of the pixel
+intensities is not known in two mixed images, this methodology should
+provide a mechanism seperating the mixture into two images.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{cv2}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         
+         \PY{n}{img0} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/frame3.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{img1} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/frame7.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{img0\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{img0}\PY{o}{/}\PY{n}{img0}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{img1\PYZus{}vec} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{n}{img1}\PY{o}{/}\PY{n}{img1}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{img0\PYZus{}vec} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{img0\PYZus{}vec}\PY{p}{)}
+         \PY{n}{img1\PYZus{}vec} \PY{o}{\PYZhy{}}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{img1\PYZus{}vec}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{gtruthI} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{img0\PYZus{}vec}\PY{p}{,} \PY{n}{img1\PYZus{}vec}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{I}\PY{p}{,} \PY{n}{ItruthA}  \PY{o}{=} \PY{n}{simpleMixer}\PY{p}{(}\PY{n}{gtruthI}\PY{p}{)}
+\end{Verbatim}
+
+
+    As with before, we can plot the distribution and it's corresponding true
+mixing matrix.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{drawDataWithMixingMatrix}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{ItruthA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Next, we will estimate the optimal distribution and find it's
+corresponding \texttt{q}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{IestimateA}\PY{p}{,} \PY{n}{recoverI} \PY{o}{=} \PY{n}{bss}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{q\PYZus{}max} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+q: 9.52
+
+    \end{Verbatim}
+
+    The result is somewhat close to the original mixing matrix, especially
+given the lack of any information about the distribution. The image
+distributions are inheritly multi-modal, which is poorly represented by
+a generalized gaussian. Even so, the algorithm is able to provide a
+fairly good estimate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{compareMixingMatrix}\PY{p}{(}\PY{n}{I}\PY{p}{,} \PY{n}{ItruthA}\PY{p}{,} \PY{n}{IestimateA}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k}{def} \PY{n+nf}{img\PYZus{}reshape}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    Note that the reconstructed images may be inverted for the same reason
+that the vectors are flipped. However, the stucture of the image and the
+differences between the intensities are kept.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}reshape}\PY{p}{(}\PY{n}{recoverI}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{img\PYZus{}reshape}\PY{p}{(}\PY{n}{recoverI}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{conclusion}{%
+\subsubsection{Conclusion}\label{conclusion}}
+
+This project provided a lot of insight on Blind Source Separation, the
+application of ICA is very broad and can be extrapolated to a variety of
+modelling problems with varying success. ICA appears to be limited to
+the availability of a prior, which can be found via a learning
+algorithm. A basic implementation of such a learning algorithm was
+implemented here.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
